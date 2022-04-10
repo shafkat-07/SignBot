@@ -42,24 +42,3 @@ def preprocessing():
     x_test = x_test.reshape(num_rows_test, 28, 28, 1)
 
     return x_train, x_test, y_train, y_test
-
-### HIS CODE BELOW #######################
-
-
-train = pd.read_csv('archive/sign_mnist_train.csv')
-test = pd.read_csv('archive/sign_mnist_test.csv')
-
-
-train_set = np.array(train, dtype = 'float32')
-test_set = np.array(test, dtype='float32')
-
-# training data set code
-X_train = train_set[:, 1:] / 255
-y_train = train_set[:, 0]
-
-X_test = test_set[:, 1:] / 255
-y_test = test_set[:,0]
-
-
-X_train = X_train.reshape(X_train.shape[0], *(28, 28, 1))
-X_test = X_test.reshape(X_test.shape[0], *(28, 28, 1))
