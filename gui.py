@@ -11,8 +11,6 @@ current_index = 0
 
 
 
-
-
 def main():
     #defining function to rotate images when button is pressed
     def next_img():
@@ -38,7 +36,7 @@ def main():
         success, new_frame = vc.get_frame()
         if success:
             new_frame = cv2.cvtColor(new_frame, cv2.COLOR_BGR2RGB)
-            tk_img = ImageTk.PhotoImage(Image.fromarray(new_frame))
+            tk_img = ImageTk.PhotoImage(Image.fromarray(new_frame).resize((700, 600), Image.Resampling.LANCZOS))
             screen_label.configure(image=tk_img)
             screen_label.image = tk_img
         root.after(15, update_screen)
