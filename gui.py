@@ -95,6 +95,7 @@ def main():
     screen_label.pack(fill=BOTH, expand=True)
     sign_label.pack(fill=BOTH, expand=True)
     snap_button.pack(fill=X)
+    picture_button.pack(fill=X)
 
     vc = VideoCapture()
 
