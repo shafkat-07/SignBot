@@ -3,7 +3,7 @@ import os
 from tkinter import *
 from tkinter import ttk
 from PIL import ImageTk, Image
-import cv2
+
 
 img_list = os.listdir("Images")
 current_index = 0
