@@ -1,11 +1,13 @@
-
 import tkinter as tk
 import cv2
+
 
 
 class VideoCapture:
     def __init__(self):
         self.video = cv2.VideoCapture(0)
+        self.video.set(3, 400) #width (change second val)
+        self.video.set(4, 400) #height (change second val)
         if not self.video.isOpened():
             raise Exception("Camera Not Found")
 
