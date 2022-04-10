@@ -38,7 +38,7 @@ def main():
         success, new_frame = vc.get_frame()
         if success:
             new_frame = cv2.cvtColor(new_frame, cv2.COLOR_BGR2RGB)
-            tk_img = ImageTk.PhotoImage(Image.fromarray(new_frame))#.resize((500, 500), Image.Resampling.LANCZOS))
+            tk_img = ImageTk.PhotoImage(Image.fromarray(new_frame).resize((600, 400), Image.Resampling.LANCZOS))
             layout.camera_label.configure(image=tk_img)
             layout.camera_label.image = tk_img
         layout.root.after(15, update_screen)
