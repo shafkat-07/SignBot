@@ -57,7 +57,6 @@ def main():
 
     #create Label to represent where the "sign to sign" will go
 
-    #img = img.resize((100, 100), Image.LANCZOS)
     img = ImageTk.PhotoImage(Image.open('Images/dog.jpeg').resize((200, 270), Image.Resampling.LANCZOS))
     sign_label = Label(r_frame, image=img)
 
