@@ -5,12 +5,30 @@ import cv2
 from datetime import time
 from cvvideo import VideoCapture
 from Layouts import SignmanLayout
+import preprocessing
+from pyexpat import model
+import numpy as np
+from keras.models import load_model
+import predict
+from model import model_gen
 
 img_list = os.listdir("Images")
 current_index = 0
 displayed_img = img_list[0]
 
-
+def generator(filename):
+     # if model exists, load existing one else save model 
+    try: 
+        mod = load_model('image_model')
+    except OSError:
+        x_train, x_test, y_train, y_test = preprocessing.preprocessing()
+        # create model 
+        mod = model_gen()
+        mod.fit(x_train, y_train, batch_size = 512, epochs = 50, verbose = 1, validation_data = (x_test, y_test))
+        mod.save('image_model')
+    
+    prediction = predict.prediction(filename, mod)
+    return prediction
 
 def main():
     #defining function to rotate images when button is pressed
@@ -50,6 +68,8 @@ def main():
         if success:
             cv2.imwrite("photo" + ".jpg", cv2.cvtColor(frame, cv2.COLOR_RGB2BGR))
             #add code for prediction() ----> outputs image file
+            prediction = generator('photo.jpg')
+            prediction = chr(prediction + 65) + '-Sign.jpg'
             prediction = displayed_img
             if prediction == displayed_img:
                 tl = layout.top_label
@@ -57,6 +77,7 @@ def main():
             else:
                 tl = layout.top_label
                 tl.configure(text="YOU SUCK", bg="red", fg="white")
+            tl.after(1500, lambda: tl.configure(text="Sign the letter:", bg="gray", fg="white"))
 
 
 
